@@ -12,3 +12,7 @@ def get_calibration_value(line):
 # PART ONE
 # print(sum(get_calibration_value(line) for line in read_input("./day_1/example_input_1")))
 print(sum(get_calibration_value(line) for line in read_input("./day_1/puzzle_input")))
+
+# PART TWO
+print(sum(get_calibration_value(line) for line in read_input("./day_1/example_input_2")))
+# print(sum(get_calibration_value(line) for line in read_input("./day_1/puzzle_input")))
