@@ -13,6 +13,33 @@ files = [
 ]
 
 [[package]]
+name = "deprecation"
+version = "2.1.0"
+description = "A library to handle automated deprecations"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "deprecation-2.1.0-py2.py3-none-any.whl", hash = "sha256:a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a"},
+    {file = "deprecation-2.1.0.tar.gz", hash = "sha256:72b3bde64e5d778694b0cf68178aed03d15e15477116add3fb773e581f9518ff"},
+]
+
+[package.dependencies]
+packaging = "*"
+
+[[package]]
+name = "infix"
+version = "1.2"
+description = "Infix operators for Python"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "infix-1.2-py3-none-any.whl", hash = "sha256:4bcd1fb402932e46dea7d440a280eda0e6f2510aa683b0808a39902281551649"},
+    {file = "infix-1.2.tar.gz", hash = "sha256:a1bfdcf875bc072f41e426d0673f2e3017750743bb90cc725fffb292eb09648c"},
+]
+
+[[package]]
 name = "iniconfig"
 version = "2.0.0"
 description = "brain-dead simple config-ini parsing"
@@ -28,13 +55,29 @@ files = [
 name = "packaging"
 version = "23.2"
 description = "Core utilities for Python packages"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
     {file = "packaging-23.2-py3-none-any.whl", hash = "sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7"},
     {file = "packaging-23.2.tar.gz", hash = "sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5"},
 ]
+
+[[package]]
+name = "peak-utility"
+version = "0.4.0"
+description = "A library of utilities, created by peaky76"
+category = "main"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "peak_utility-0.4.0-py3-none-any.whl", hash = "sha256:a5ba8e484aa2502387b30f61c1b29c2b14db87c79510232fa6c4b093ce1778ba"},
+    {file = "peak_utility-0.4.0.tar.gz", hash = "sha256:c90aa7cb135ec4c8cdb74b64fdc6c5bc480030951b9df61cea9064e3db6f4178"},
+]
+
+[package.dependencies]
+deprecation = ">=2.1.0,<3.0.0"
+infix = ">=1.2,<2.0"
 
 [[package]]
 name = "pluggy"
@@ -76,4 +119,4 @@ testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "no
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "a90a99984f5620be3b1732353abf5d343d3316684b2f1a669cda5d881ea706c1"
+content-hash = "01533037e838865e989911668dd427654767abf6b17f11911522277b2796cf0c"
