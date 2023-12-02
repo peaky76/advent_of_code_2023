@@ -1,5 +1,5 @@
 import pytest
-from .app import parse_grab, parse_input
+from .app import min_possible_balls, parse_grab, parse_input
 
 
 @pytest.mark.parametrize(
@@ -41,5 +41,35 @@ def test_parse_grab(test_input, expected):
         ),
     ],
 )
-def test_find_first_number(test_input, expected):
+def test_parse_input(test_input, expected):
     assert parse_input(test_input) == expected
+
+
+
+@pytest.mark.parametrize(
+    "test_input,expected",
+    [
+        (
+            [(4, 0, 3), (1, 2, 6), (0, 2, 0)],
+            (4, 2, 6)
+        ),
+        (
+            [(0, 2, 1), (1, 3, 4), (0, 1, 1)],
+            (1, 3, 4)
+        ),
+        (
+            [(20, 8, 6), (4, 13, 5), (1, 5, 0)],
+            (20, 13, 6)
+        ),
+        (
+            [(3, 1, 6), (6, 3, 0), (14, 3, 15)],
+            (14, 3, 15)
+        ),
+        (
+            [(6, 3, 1), (1, 2, 2)],
+            (6, 3, 2)
+        ),
+    ],
+)
+def test_min_possible_balls(test_input, expected):
+    assert min_possible_balls(test_input) == expected
