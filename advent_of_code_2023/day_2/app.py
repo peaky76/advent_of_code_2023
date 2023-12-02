@@ -1,4 +1,4 @@
-import math
+from math import prod
 import re
 import sys
 
@@ -36,7 +36,7 @@ def is_grab_too_much(grab_rgb, limit_rgb):
 
 
 def is_game_possible(grabs, limit_rgb):
-    return all(not is_grab_too_much(grab_rgb, limit_rgb) for grab_rgb in grabs)
+    return not any(is_grab_too_much(grab_rgb, limit_rgb) for grab_rgb in grabs)
 
 
 def sum_of_possible_games(lines, limit_rgb=(12, 13, 14)):
@@ -45,11 +45,6 @@ def sum_of_possible_games(lines, limit_rgb=(12, 13, 14)):
         for game in get_games(lines)
         if is_game_possible(game["rgb"], limit_rgb)
     )
-
-
-def power(grab_rgb):
-    return math.prod(grab_rgb)
-
 
 def get_games(input):
     return [parse_input(line) for line in input]
@@ -63,12 +58,12 @@ print(f"Puzzle answer: {puzzle_answer}")
 
 # # PART TWO
 example_answer = sum(
-    power(min_possible_balls(game["rgb"]))
+    prod(min_possible_balls(game["rgb"]))
     for game in get_games(read_input("./day_2/example_input"))
 )
 print(f"Example answer: {example_answer}")
 puzzle_answer = sum(
-    power(min_possible_balls(game["rgb"]))
+    prod(min_possible_balls(game["rgb"]))
     for game in get_games(read_input("./day_2/puzzle_input"))
 )
 print(f"Puzzle answer: {puzzle_answer}")
