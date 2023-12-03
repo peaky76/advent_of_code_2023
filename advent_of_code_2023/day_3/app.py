@@ -31,6 +31,9 @@ def get_part_numbers(lines):
 def get_part_indicators(lines):
     return [(i, j) for i, line in enumerate(lines) for j, char in enumerate(line) if not char.isdigit() and not char == '.']
 
+def get_gears(lines):
+    return [(i, j) for i, line in enumerate(lines) for j, char in enumerate(line) if char == '*']
+
 def has_adjacent_indicator(part_loc_and_len, part_indicators):
     x, y, length = part_loc_and_len
     coords = [(x, i) for i in range(y, y + length)]

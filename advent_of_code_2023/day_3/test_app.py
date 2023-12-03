@@ -1,5 +1,5 @@
 import pytest
-from .app import get_part_numbers, get_part_indicators, has_adjacent_indicator, is_adjacent
+from .app import get_gears, get_part_numbers, get_part_indicators, has_adjacent_indicator, is_adjacent
 
 def test_get_part_numbers():
     lines = ["123...",".45.67","..890."]
@@ -16,6 +16,12 @@ def test_get_part_indicators():
     lines = ["123.$.",".45.67","..#..."]
     expected = get_part_indicators(lines)
     actual = [(0, 4), (2, 2)]
+    assert expected == actual
+
+def test_get_gears():
+    lines = ["123...",".45*67","..890."]
+    expected = get_gears(lines)
+    actual = [(1,3)]
     assert expected == actual
 
 @pytest.mark.parametrize(
