@@ -4,12 +4,12 @@ from .app import get_part_numbers, get_part_indicators, has_adjacent_indicator, 
 def test_get_part_numbers():
     lines = ["123...",".45.67","..890."]
     expected = get_part_numbers(lines)
-    actual = {
-        123: (0, 0), 
-        45: (1, 1), 
-        67: (1, 4), 
-        890: (2, 2)
-    }
+    actual = [
+        (123, 0, 0), 
+        (45, 1, 1), 
+        (67, 1, 4), 
+        (890, 2, 2)
+    ]
     assert expected == actual
 
 def test_get_part_indicators():
@@ -21,6 +21,7 @@ def test_get_part_indicators():
 @pytest.mark.parametrize(
     "test_input,expected",
     [
+        ([(3, 3), (2, 2)], True),
         ([(3, 3), (3, 4)], True),
         ([(3, 3), (2, 3)], True), 
         ([(3, 3), (3, 2)], True),
@@ -41,6 +42,16 @@ def test_is_adjacent(test_input, expected):
         ([(0, 5, 3), [(1, 3), (2, 6), (3,3), (4, 5)]], False),
         ([(2, 2, 2), [(1, 3), (2, 6), (3,3), (4, 5)]], True),
         ([(2, 6, 3), [(1, 3), (2, 6), (3,3), (4, 5)]], True),
+        ([(3, 2, 3), [(2, 1)]], True),
+        ([(3, 2, 3), [(2, 3)]], True),
+        ([(3, 2, 3), [(2, 5)]], True),
+        ([(3, 2, 3), [(3, 1)]], True),
+        ([(3, 2, 3), [(3, 5)]], True),
+        ([(3, 2, 3), [(4, 1)]], True),
+        ([(3, 2, 3), [(4, 3)]], True),
+        ([(3, 2, 3), [(4, 5)]], True),
+        ([(3, 2, 3), [(4, 6)]], False),
+        ([(3, 2, 3), [(2, 0)]], False),
     ],
 )
 def test_has_adjacent_indicator(test_input, expected):
