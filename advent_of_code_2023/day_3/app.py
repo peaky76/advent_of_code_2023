@@ -46,12 +46,22 @@ def is_adjacent(coord_1, coord_2):
     x_2, y_2 = coord_2
     return abs(x_1 - x_2) <= 1 and abs(y_1 - y_2) <= 1
 
+def sum_gear_ratios(file):
+    lines = read_input(file)
+    part_numbers = get_part_numbers(lines)
+    gears = get_gears(lines)
+    gear_ratio_sum = 0
+    for gear in gears:
+        adjacent_parts = [part_number[0] for part_number in part_numbers if has_adjacent_indicator((part_number[1], part_number[2], len(str(part_number[0]))), [gear])]
+        if len(adjacent_parts) == 2:   
+            gear_ratio = prod(adjacent_parts) 
+            gear_ratio_sum += gear_ratio
+    return gear_ratio_sum 
+
 def find_valid_part_numbers(file):
     lines = read_input(file)
     part_numbers = get_part_numbers(lines)
-    print(part_numbers)
     part_indicators = get_part_indicators(lines)
-    print(part_indicators)
     return [part_number[0] for part_number in part_numbers if has_adjacent_indicator((part_number[1], part_number[2], len(str(part_number[0]))), part_indicators)]
 
 # PART ONE
@@ -60,8 +70,8 @@ print(f"Example answer: {example_answer}")
 puzzle_answer = sum(find_valid_part_numbers("./day_3/puzzle_input"))
 print(f"Puzzle answer: {puzzle_answer}")
 
-# # # PART TWO
-# example_answer = the_function(read_input("./day_3/example_input"))
-# print(f"Example answer: {example_answer}")
-# puzzle_answer = the_function(read_input("./day_3/puzzle_input"))
-# print(f"Puzzle answer: {puzzle_answer}")
+# PART TWO
+example_answer = sum_gear_ratios("./day_3/example_input")
+print(f"Example answer: {example_answer}")
+puzzle_answer = sum_gear_ratios("./day_3/puzzle_input")
+print(f"Puzzle answer: {puzzle_answer}")
