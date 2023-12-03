@@ -28,6 +28,8 @@ def get_part_numbers(lines):
 
     return part_numbers
         
+def get_part_indicators(lines):
+    return [(i, j) for i, line in enumerate(lines) for j, char in enumerate(line) if not char.isdigit() and not char == '.']
 
 # PART ONE
 # example_answer = the_function(read_input("./day_3/example_input"))

@@ -1,4 +1,4 @@
-from .app import get_part_numbers
+from .app import get_part_numbers, get_part_indicators
 
 def test_get_part_numbers():
     lines = ["123...",".45.67","..890."]
@@ -9,4 +9,10 @@ def test_get_part_numbers():
         67: (1, 4), 
         890: (2, 2)
     }
+    assert expected == actual
+
+def test_get_part_indicators():
+    lines = ["123.$.",".45.67","..#..."]
+    expected = get_part_indicators(lines)
+    actual = [(0, 4), (2, 2)]
     assert expected == actual
