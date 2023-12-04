@@ -13,6 +13,10 @@ def parse_line(line):
         "selected_nums": [int(num) for num in line.split(":")[1].split("|")[1].split()],
     }    
 
+def calculate_points(scratchcard):
+    wins = sum(num in scratchcard["winning_nums"] for num in scratchcard["selected_nums"])
+    return 1 * (2 ** (wins  - 1)) if wins else 0
+
 # PART ONE
 # example_answer = the_function("./day_4/example_input")
 # print(f"Example answer: {example_answer}")
