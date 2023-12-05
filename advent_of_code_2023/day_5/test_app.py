@@ -1,26 +1,12 @@
-import pytest
-from .app import create_map_function, parse_line, parse_seeds_line, parse_title
-
+from .app import create_map_function, parse_seeds_line, parse_title
 
 def test_create_map_function():
-    mappings = [(0, 10, 1), (11, 20, 2), (21, 30, 3)]
-    map_function = create_map_function(mappings)
+    lines = [(1, 0, 10), (13, 11, 10), (24, 21, 10)]
+    map_function = create_map_function(lines)
     assert map_function(0) == 1
     assert map_function(15) == 17
     assert map_function(25) == 28
     assert map_function(35) == 35
-
-@pytest.mark.parametrize(
-    "test_input,expected",
-    [
-        ("50 98 2", (98, 99, -48)),
-        ("42 0 7", (0, 6, 42)),
-        ("18 25 70", (25, 94, -7)),
-    ],
-)
-def test_parse_line(test_input, expected):
-    actual = parse_line(test_input)
-    assert actual == expected
 
 def test_parse_seeds_line_not_as_range():
     actual = parse_seeds_line("seeds: 79 14 55 13")

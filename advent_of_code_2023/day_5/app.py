@@ -6,11 +6,12 @@ sys.path.append("..")
 
 from advent_of_code_2023 import read_input  # noqa: E402
 
-def create_map_function(mappings):
+def create_map_function(lines):
     def map_function(seed):
-        for mapping in mappings:
-            if mapping[0] <= seed <= mapping[1]:
-                return seed + mapping[2]
+        for line in lines:
+            if line[1] <= seed < line[1] + line[2]:
+                diff = line[0] - line[1]
+                return seed + diff
         return seed
 
     return map_function
@@ -28,13 +29,12 @@ def get_paras(lines):
     return paras
     
 def parse_line(line):
-    destination_start, source_start, range_length = (int(x) for x in line.split(" "))
-    return (source_start, source_start + range_length - 1, destination_start - source_start)
-
+    return [int(x) for x in line.split(" ")]
+    
 def parse_para(para):
     title = parse_title(para[0])
-    map_function = create_map_function([parse_line(line) for line in para[1:]])
-    return (*title, map_function)
+    lines = [parse_line(line) for line in para[1:]]
+    return [*title, lines]
 
 def parse_seeds_line(line, *, as_range=False):
     nums = [int(x) for x in line.split('seeds: ')[1].split(" ")]
@@ -46,11 +46,12 @@ def parse_seeds_line(line, *, as_range=False):
 def parse_title(title):
     return tuple(title.split(" map")[0].split("-to-"))
 
-
 def get_min_for_individual_seeds(file):
     lines = read_input(file)
     paras = get_paras(lines[2:])
-    mapping_dictionary = {para[0]: (para[1], para[2]) for para in paras}
+    mapping_dictionary = {}
+    for para in paras:
+        mapping_dictionary[para[0]] = (para[1], create_map_function(para[2]))
 
     function_chain = []
     dictionary_key = 'seed'
@@ -67,8 +68,25 @@ def get_min_for_individual_seeds(file):
     return min(locations)
 
 def get_min_for_range_of_seeds(file):
-    pass
+    lines = read_input(file)
+    paras = get_paras(lines[2:])
+    mapping_dictionary = {}
+    for para in paras:
+        mapping_dictionary[para[0]] = (para[1], create_map_function(para[2]))
 
+    function_chain = []
+    dictionary_key = 'seed'
+    while dictionary_key != 'location':
+        function_chain.append(mapping_dictionary[dictionary_key][1])
+        dictionary_key = mapping_dictionary[dictionary_key][0]
+
+    locations = []
+    for seed in parse_seeds_line(lines[0], as_range=True):
+        for function in function_chain:
+            seed = function(seed)
+        locations.append(seed)
+
+    return min(locations)
     
 # PART ONE
 example_answer = get_min_for_individual_seeds("./day_5/example_input")
@@ -79,5 +97,5 @@ print(f"Puzzle answer: {puzzle_answer}")
 # PART TWO
 example_answer = get_min_for_range_of_seeds("./day_5/example_input")
 print(f"Example answer: {example_answer}")
-puzzle_answer = get_min_for_range_of_seeds("./day_5/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
+# puzzle_answer = get_min_for_range_of_seeds("./day_5/puzzle_input")
+# print(f"Puzzle answer: {puzzle_answer}")
