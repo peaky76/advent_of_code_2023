@@ -29,7 +29,7 @@ def get_paras(lines):
 
 def parse_input(file):
     lines = read_input(file)
-    starter_seeds = [int(x) for x in lines[0].split('seeds: ')[1].split(" ")]
+    starter_seeds = parse_seeds_line(lines[0])
     paras = get_paras(lines[2:])
     mapping_dictionary = {para[0]: (para[1], para[2]) for para in paras}
 
@@ -56,13 +56,17 @@ def parse_para(para):
     map_function = create_map_function([parse_line(line) for line in para[1:]])
     return (*title, map_function)
 
+def parse_seeds_line(line, *, as_range=False):
+    nums = [int(x) for x in line.split('seeds: ')[1].split(" ")]
+    if as_range:
+        pairs = zip(nums[::2], nums[1::2])
+        return [i + pair[0] for pair in pairs for i in range(pair[1])]
+    return nums
+
 def parse_title(title):
     return tuple(title.split(" map")[0].split("-to-"))
 
-# def the_function(file):
-#     lines = read_input(file)
     
-
 # PART ONE
 example_answer = min(parse_input("./day_5/example_input"))
 print(f"Example answer: {example_answer}")
