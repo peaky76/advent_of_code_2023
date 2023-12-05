@@ -7,9 +7,13 @@ sys.path.append("..")
 # from advent_of_code_2023 import read_input  # noqa: E402
 
 
+
 def parse_line(line):
     destination_start, source_start, range_length = (int(x) for x in line.split(" "))
     return (source_start, source_start + range_length - 1, destination_start - source_start)
+
+def parse_title(title):
+    return tuple(title.split(" map")[0].split("-to-"))
 
 # def the_function(file):
 #     lines = read_input(file)
