@@ -6,7 +6,14 @@ sys.path.append("..")
 
 # from advent_of_code_2023 import read_input  # noqa: E402
 
+def create_map_function(mappings):
+    def map_function(seed):
+        for mapping in mappings:
+            if mapping[0] <= seed <= mapping[1]:
+                return seed + mapping[2]
+        return seed
 
+    return map_function
 
 def parse_line(line):
     destination_start, source_start, range_length = (int(x) for x in line.split(" "))

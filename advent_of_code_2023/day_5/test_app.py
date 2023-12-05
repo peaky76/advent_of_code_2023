@@ -1,5 +1,14 @@
 import pytest
-from .app import parse_line, parse_title
+from .app import create_map_function, parse_line, parse_title
+
+
+def test_create_map_function():
+    mappings = [(0, 10, 1), (11, 20, 2), (21, 30, 3)]
+    map_function = create_map_function(mappings)
+    assert map_function(0) == 1
+    assert map_function(15) == 17
+    assert map_function(25) == 28
+    assert map_function(35) == 35
 
 @pytest.mark.parametrize(
     "test_input,expected",
