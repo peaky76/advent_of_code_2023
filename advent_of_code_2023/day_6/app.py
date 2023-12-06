@@ -17,6 +17,9 @@ def get_times_and_distances(lines):
 def possible_distances(time):
     return [i * (time - i) for i in range(time + 1)]
 
+def num_ways_to_win(time, record):
+    return len([x for x in possible_distances(time) if x > record])
+
 # PART ONE
 example_answer = get_times_and_distances(read_input("./day_6/example_input"))
 print(f"Example answer: {example_answer}")
