@@ -1,5 +1,5 @@
 import pytest
-from .app import get_times_and_distances
+from .app import get_times_and_distances, possible_distances
 
 @pytest.mark.parametrize(
     "test_input,expected",
@@ -11,3 +11,8 @@ def test_get_times_and_distances(test_input, expected):
     actual = get_times_and_distances(test_input)
     assert actual == expected
     
+def test_possible_distances_with_odd_time():
+    assert possible_distances(7) == [0, 6, 10, 12, 12, 10, 6, 0]
+
+def test_possible_distances_with_even_time():
+    assert possible_distances(8) == [0, 7, 12, 15, 16, 15, 12, 7, 0]

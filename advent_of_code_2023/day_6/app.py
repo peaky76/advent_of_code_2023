@@ -14,6 +14,9 @@ def get_times_and_distances(lines):
         to_zip.append([int(x) for x in line.split(" ")[1:]])
     return list(zip(*to_zip))
 
+def possible_distances(time):
+    return [i * (time - i) for i in range(time + 1)]
+
 # PART ONE
 example_answer = get_times_and_distances(read_input("./day_6/example_input"))
 print(f"Example answer: {example_answer}")
