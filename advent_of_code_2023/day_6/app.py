@@ -1,5 +1,5 @@
 # Day 6: Wait For It
-
+from math import prod
 import sys
 
 sys.path.append("..")
@@ -20,14 +20,18 @@ def possible_distances(time):
 def num_ways_to_win(time, record):
     return len([x for x in possible_distances(time) if x > record])
 
+def calculate_margin_of_error(file):
+    lines = read_input(file)
+    return prod([num_ways_to_win(time, distance) for time, distance in get_times_and_distances(lines)])
+
 # PART ONE
-example_answer = get_times_and_distances(read_input("./day_6/example_input"))
+example_answer = calculate_margin_of_error("./day_6/example_input")
 print(f"Example answer: {example_answer}")
-puzzle_answer = get_times_and_distances(read_input("./day_6/puzzle_input"))
+puzzle_answer = calculate_margin_of_error("./day_6/puzzle_input")
 print(f"Puzzle answer: {puzzle_answer}")
 
 # PART TWO
-example_answer = get_times_and_distances(read_input("./day_6/example_input"))
+example_answer = calculate_margin_of_error("./day_6/example_input")
 print(f"Example answer: {example_answer}")
-puzzle_answer = get_times_and_distances(read_input("./day_6/puzzle_input"))
+puzzle_answer = calculate_margin_of_error("./day_6/puzzle_input")
 print(f"Puzzle answer: {puzzle_answer}")
