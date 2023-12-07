@@ -13,10 +13,20 @@ from .app import hand_grouping, rank_cards, rank_equal_hands, rank_hands
        ('23456', (1, 1, 1, 1, 1))
     ],
 )
-def test_hand_grouping(test_input, expected):
+def test_hand_grouping_without_wild_jack(test_input, expected):
     actual = hand_grouping(test_input)
     assert actual == expected
-    
+
+@pytest.mark.parametrize(
+    "test_input,expected",
+    [
+       ('KTJJT', (4, 1)),
+    ],
+)
+def test_hand_grouping_with_wild_jack(test_input, expected):
+    actual = hand_grouping(test_input, wild_jack=True)
+    assert actual == expected
+
 def test_rank_cards():
     actual = rank_cards(['5', 'A', '7', '3', 'K', '2', 'T', 'Q', '6'])
     expected = ['2', '3', '5', '6', '7', 'T', 'Q', 'K', 'A']
