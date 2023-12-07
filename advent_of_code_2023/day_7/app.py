@@ -24,10 +24,10 @@ def hand_grouping(hand, *, wild_jack=False):
     count = Counter(list(hand))
 
     if wild_jack:
-        if len(count) > 1:
-            del count["J"]
-        hand = hand.replace("J", max(count, key=count.get))
-        count = Counter(list(hand))
+        non_wild_count = {k: v for k, v in count.items() if k != "J"}
+        if len(non_wild_count):
+            hand = hand.replace("J", max(non_wild_count, key=non_wild_count.get))
+            count = Counter(list(hand))
 
     return tuple(sorted(count.values(), reverse=True))
 
@@ -36,7 +36,7 @@ def rank_cards(cards):
 
 def rank_equal_hands(hands):
     return sorted(hands, key=lambda hand: [CARD_ORDER.index(card) for card in hand])
-
+    
 def rank_hands(hands):
     return sorted(hands, key=lambda hand: (hand_grouping(hand), [CARD_ORDER.index(card) for card in hand]))
     
