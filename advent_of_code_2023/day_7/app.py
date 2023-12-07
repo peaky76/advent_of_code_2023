@@ -16,7 +16,7 @@ import sys
 sys.path.append("..")
 
 # from advent_of_code_2023 import read_input  # noqa: E402
-CARD_ORDER = "AKQJT98765432"
+CARD_ORDER = "23456789TJQKA"
 
 def hand_grouping(hand):
     return tuple(sorted(Counter(list(hand)).values(), reverse=True))
@@ -26,6 +26,9 @@ def rank_cards(cards):
 
 def rank_equal_hands(hands):
     return sorted(hands, key=lambda hand: [CARD_ORDER.index(card) for card in hand])
+
+def rank_hands(hands):
+    return sorted(hands, key=lambda hand: (hand_grouping(hand), [CARD_ORDER.index(card) for card in hand]))
     
 
 # PART ONE

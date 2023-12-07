@@ -1,5 +1,5 @@
 import pytest
-from .app import hand_grouping, rank_cards, rank_equal_hands
+from .app import hand_grouping, rank_cards, rank_equal_hands, rank_hands
 
 @pytest.mark.parametrize(
     "test_input,expected",
@@ -19,10 +19,15 @@ def test_hand_grouping(test_input, expected):
     
 def test_rank_cards():
     actual = rank_cards(['5', 'A', '7', '3', 'K', '2', 'T', 'Q', '6'])
-    expected = ['A', 'K', 'Q', 'T', '7', '6', '5', '3', '2']
+    expected = ['2', '3', '5', '6', '7', 'T', 'Q', 'K', 'A']
     assert actual == expected
 
 def test_rank_equal_hands():
     actual = rank_equal_hands(["33332", "2AAAA", "QKQQQ"])
-    expected = ["QKQQQ", "33332", "2AAAA"]
+    expected = ["2AAAA", "33332", "QKQQQ"]
+    assert actual == expected
+
+def test_rank_hands():
+    actual = rank_hands(["32T3K", "T55J5", "KK677", "KTJJT", "QQQJA"])
+    expected = ["32T3K", "KTJJT", "KK677", "T55J5", "QQQJA"]
     assert actual == expected
