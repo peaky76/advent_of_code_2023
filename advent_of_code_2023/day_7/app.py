@@ -15,7 +15,8 @@ import sys
 
 sys.path.append("..")
 
-# from advent_of_code_2023 import read_input  # noqa: E402
+from advent_of_code_2023 import read_input  # noqa: E402
+
 CARD_ORDER = "23456789TJQKA"
 
 def hand_grouping(hand):
@@ -30,15 +31,20 @@ def rank_equal_hands(hands):
 def rank_hands(hands):
     return sorted(hands, key=lambda hand: (hand_grouping(hand), [CARD_ORDER.index(card) for card in hand]))
     
+def get_total_winnings(file):
+    lines = read_input(file)
+    hands_and_bets = [(line.split(" ")[0], int(line.split(" ")[1])) for line in lines]
+    ranked_hands_and_bets = sorted(hands_and_bets, key=lambda hand_and_bet: (hand_grouping(hand_and_bet[0]), [CARD_ORDER.index(card) for card in hand_and_bet[0]]))
+    return sum([(i + 1) * hand_and_bet[1] for i, hand_and_bet in enumerate(ranked_hands_and_bets)])
 
 # PART ONE
-# example_answer = the_function("./day_7/example_input")
-# print(f"Example answer: {example_answer}")
-# puzzle_answer = the_function("./day_7/puzzle_input")
-# print(f"Puzzle answer: {puzzle_answer}")
+example_answer = get_total_winnings("./day_7/example_input")
+print(f"Example answer: {example_answer}")
+puzzle_answer = get_total_winnings("./day_7/puzzle_input")
+print(f"Puzzle answer: {puzzle_answer}")
 
 # # PART TWO
-# example_answer = the_function("./day_7/example_input")
+# example_answer = get_total_winnings("./day_7/example_input")
 # print(f"Example answer: {example_answer}")
-# puzzle_answer = the_function("./day_7/puzzle_input")
+# puzzle_answer = get_total_winnings("./day_7/puzzle_input")
 # print(f"Puzzle answer: {puzzle_answer}")
