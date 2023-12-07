@@ -24,6 +24,8 @@ def hand_grouping(hand, *, wild_jack=False):
     count = Counter(list(hand))
 
     if wild_jack:
+        if len(count) > 1:
+            del count["J"]
         hand = hand.replace("J", max(count, key=count.get))
         count = Counter(list(hand))
 
@@ -54,5 +56,5 @@ print(f"Puzzle answer: {puzzle_answer}")
 # # PART TWO
 example_answer = get_total_winnings("./day_7/example_input", wild_jack=True)
 print(f"Example answer: {example_answer}")
-# puzzle_answer = get_total_winnings("./day_7/puzzle_input", wild_jack=True)
-# print(f"Puzzle answer: {puzzle_answer}")
+puzzle_answer = get_total_winnings("./day_7/puzzle_input", wild_jack=True)
+print(f"Puzzle answer: {puzzle_answer}")
