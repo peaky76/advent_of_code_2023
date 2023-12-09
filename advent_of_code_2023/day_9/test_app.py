@@ -1,5 +1,17 @@
 import pytest
-from .app import extrapolate_value, get_diffs
+from .app import extrapolate_backwards, extrapolate_forwards, get_diffs
+
+@pytest.mark.parametrize(
+    "test_input,expected",
+    [
+        ([0,3,6,9,12,15], -3),
+        ([1,3,6,10,15,21], 0),
+        ([10,13,16,21,30,45], 5),
+    ],
+)
+def test_extrapolate_backwards(test_input, expected):
+    actual = extrapolate_backwards(test_input)
+    assert actual == expected
 
 @pytest.mark.parametrize(
     "test_input,expected",
@@ -9,10 +21,10 @@ from .app import extrapolate_value, get_diffs
         ([10,13,16,21,30,45], 68),
     ],
 )
-def test_extrapolate_value(test_input, expected):
-    actual = extrapolate_value(test_input)
+def test_extrapolate_forwards(test_input, expected):
+    actual = extrapolate_forwards(test_input)
     assert actual == expected
-    
+      
 @pytest.mark.parametrize(
     "test_input,expected",
     [
