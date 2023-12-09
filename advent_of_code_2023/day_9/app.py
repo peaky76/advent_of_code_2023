@@ -9,8 +9,11 @@ from advent_of_code_2023 import read_input  # noqa: E402
 def get_diffs(line):
     return [n - line[i] for i, n in enumerate(line[1:])]
 
-# def extrapolate_value(line):
-#     pass
+def extrapolate_value(line):
+    if all(diff == 0 for diff in get_diffs(line)):
+        return line[-1] + 0
+    else:
+        return line[-1] + extrapolate_value(get_diffs(line))
 
 # def extrapolate_values(lines):
 #     return [extrapolate_value(line) for line in lines]
