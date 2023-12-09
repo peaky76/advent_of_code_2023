@@ -15,19 +15,16 @@ def extrapolate_value(line):
     else:
         return line[-1] + extrapolate_value(get_diffs(line))
 
-# def extrapolate_values(lines):
-#     return [extrapolate_value(line) for line in lines]
-
-# def sum_extrapolate_values(file):
-#     lines = read_input(file)
-#     return sum(extrapolate_values(lines)) 
+def sum_extrapolate_values(file):
+    lines = read_input(file)
+    return sum(extrapolate_value([int(x) for x in line.split(" ")]) for line in lines) 
 
 # # PART ONE
-# print("PART ONE:")
-# example_answer = sum_extrapolate_values("./day_9/example_input")
-# print(f"Example answer: {example_answer}")
-# puzzle_answer = sum_extrapolate_values("./day_9/puzzle_input")
-# print(f"Puzzle answer: {puzzle_answer}")
+print("PART ONE:")
+example_answer = sum_extrapolate_values("./day_9/example_input")
+print(f"Example answer: {example_answer}")
+puzzle_answer = sum_extrapolate_values("./day_9/puzzle_input")
+print(f"Puzzle answer: {puzzle_answer}")
 
 # # PART TWO
 # print("PART TWO:")
