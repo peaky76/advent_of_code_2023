@@ -1,4 +1,4 @@
-# Day 3: Gear Ratios
+# Day X:
 
 import sys
 
@@ -11,13 +11,15 @@ def the_function(file):
     
 
 # PART ONE
-example_answer = the_function("./day_4/example_input")
+print("PART ONE:")
+example_answer = the_function("./day_x/example_input")
 print(f"Example answer: {example_answer}")
-puzzle_answer = the_function("./day_4/puzzle_input")
+puzzle_answer = the_function("./day_x/puzzle_input")
 print(f"Puzzle answer: {puzzle_answer}")
 
 # PART TWO
-example_answer = the_function("./day_4/example_input")
+print("PART TWO:")
+example_answer = the_function("./day_x/example_input")
 print(f"Example answer: {example_answer}")
-puzzle_answer = the_function("./day_4/puzzle_input")
+puzzle_answer = the_function("./day_x/puzzle_input")
 print(f"Puzzle answer: {puzzle_answer}")
