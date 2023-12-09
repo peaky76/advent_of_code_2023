@@ -1,6 +1,7 @@
 # Day 9: Mirage Maintenance
 
 import sys
+from operator import add, sub
 
 sys.path.append("..")
 
@@ -9,22 +10,15 @@ from advent_of_code_2023 import read_input  # noqa: E402
 def get_diffs(line):
     return [n - line[i] for i, n in enumerate(line[1:])]
 
-def extrapolate_backwards(line):
-    if all(diff == 0 for diff in get_diffs(line)):
-        return line[0] - 0
-    else:
-        return line[0] - extrapolate_backwards(get_diffs(line))
-
-def extrapolate_forwards(line):
-    if all(diff == 0 for diff in get_diffs(line)):
-        return line[-1] + 0
-    else:
-        return line[-1] + extrapolate_forwards(get_diffs(line))
+def extrapolate(line, *, forwards=True):
+    idx = -1 if forwards else 0
+    op = add if forwards else sub
+    diffs = get_diffs(line)
+    return op(line[idx], 0 if not sum(diffs) else extrapolate(diffs, forwards=forwards))
 
 def sum_extrapolate_values(file, *, forwards = True):
     lines = read_input(file)
-    extrapolate_fn = extrapolate_forwards if forwards else extrapolate_backwards
-    return sum(extrapolate_fn([int(x) for x in line.split(" ")]) for line in lines) 
+    return sum(extrapolate([int(x) for x in line.split(" ")], forwards=forwards) for line in lines) 
 
 # # PART ONE
 print("PART ONE:")
