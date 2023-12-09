@@ -20,6 +20,7 @@ from advent_of_code_2023 import read_input  # noqa: E402
 CARD_ORDER = "23456789TJQKA"
 CARD_ORDER_WILD = "J23456789TQKA"
 
+
 def hand_grouping(hand, *, wild_jack=False):
     count = Counter(list(hand))
 
@@ -31,21 +32,43 @@ def hand_grouping(hand, *, wild_jack=False):
 
     return tuple(sorted(count.values(), reverse=True))
 
+
 def rank_cards(cards):
     return sorted(cards, key=lambda card: CARD_ORDER.index(card))
 
+
 def rank_equal_hands(hands):
     return sorted(hands, key=lambda hand: [CARD_ORDER.index(card) for card in hand])
-    
+
+
 def rank_hands(hands):
-    return sorted(hands, key=lambda hand: (hand_grouping(hand), [CARD_ORDER.index(card) for card in hand]))
-    
+    return sorted(
+        hands,
+        key=lambda hand: (
+            hand_grouping(hand),
+            [CARD_ORDER.index(card) for card in hand],
+        ),
+    )
+
+
 def get_total_winnings(file, *, wild_jack=False):
     lines = read_input(file)
     ORDERING = CARD_ORDER_WILD if wild_jack else CARD_ORDER
     hands_and_bets = [(line.split(" ")[0], int(line.split(" ")[1])) for line in lines]
-    ranked_hands_and_bets = sorted(hands_and_bets, key=lambda hand_and_bet: (hand_grouping(hand_and_bet[0], wild_jack=wild_jack), [ORDERING.index(card) for card in hand_and_bet[0]]))
-    return sum([(i + 1) * hand_and_bet[1] for i, hand_and_bet in enumerate(ranked_hands_and_bets)])
+    ranked_hands_and_bets = sorted(
+        hands_and_bets,
+        key=lambda hand_and_bet: (
+            hand_grouping(hand_and_bet[0], wild_jack=wild_jack),
+            [ORDERING.index(card) for card in hand_and_bet[0]],
+        ),
+    )
+    return sum(
+        [
+            (i + 1) * hand_and_bet[1]
+            for i, hand_and_bet in enumerate(ranked_hands_and_bets)
+        ]
+    )
+
 
 # PART ONE
 example_answer = get_total_winnings("./day_7/example_input")

@@ -6,9 +6,10 @@ sys.path.append("..")
 
 from advent_of_code_2023 import read_input  # noqa: E402
 
+
 def the_function(file):
     lines = read_input(file)
-    
+
 
 # PART ONE
 print("PART ONE:")

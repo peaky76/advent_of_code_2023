@@ -46,6 +46,7 @@ def sum_of_possible_games(lines, limit_rgb=(12, 13, 14)):
         if is_game_possible(game["rgb"], limit_rgb)
     )
 
+
 def get_games(input):
     return [parse_input(line) for line in input]
 
