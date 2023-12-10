@@ -15,18 +15,20 @@ from advent_of_code_2023 import read_input  # noqa: E402
 # . is ground; there is no pipe in this tile.
 # S is the starting position of the animal; there is a pipe on this tile, but your sketch doesn't show what shape the pipe has.
 
+
 def convert_symbol_to_exits(loc, symbol):
     x, y = loc
     return {
         ".": [],
         "|": [(x - 1, y), (x + 1, y)],
         "-": [(x, y - 1), (x, y + 1)],
-        "L": [(x - 1, y), (x, y + 1)],  
+        "L": [(x - 1, y), (x, y + 1)],
         "J": [(x - 1, y), (x, y - 1)],
         "7": [(x + 1, y), (x, y - 1)],
         "F": [(x + 1, y), (x, y + 1)],
         "S": [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)],
     }[symbol]
+
 
 def get_continuous_ranges(y_values):
     continuous_ranges = []
@@ -39,26 +41,31 @@ def get_continuous_ranges(y_values):
                     continuous_ranges.append((range_start, range_end + 1))
                     range_start = y
                 range_end = y
-        
+
         continuous_ranges.append((range_start, range_end + 1))
 
     return continuous_ranges
 
+
 def is_connected(the_map, loc, other_loc):
     return loc in the_map[other_loc] and other_loc in the_map[loc]
 
+
 def is_within_left_bounds(steps, test_loc):
-    x, y = test_loc    
+    x, y = test_loc
     return any([loc for loc in steps if loc[0] == x and loc[1] < y])
+
 
 def has_lower_link(the_map, loc):
     return (loc[0] + 1, loc[1]) in the_map.get(loc, [])
 
+
 def has_upper_link(the_map, loc):
     return (loc[0] - 1, loc[1]) in the_map.get(loc, [])
 
+
 def is_enclosed(the_map, steps, test_loc):
-    x, y = test_loc    
+    x, y = test_loc
     map_locs_to_right = sorted([loc for loc in steps if loc[0] == x and loc[1] > y])
 
     num_of_crossing_pipes = 0
@@ -66,7 +73,7 @@ def is_enclosed(the_map, steps, test_loc):
     for loc in map_locs_to_right:
         upper_link = has_upper_link(the_map, loc)
         lower_link = has_lower_link(the_map, loc)
-        if upper_link and lower_link:            
+        if upper_link and lower_link:
             num_of_crossing_pipes += 1
         elif upper_link:
             if looking_for == "upper":
@@ -83,8 +90,14 @@ def is_enclosed(the_map, steps, test_loc):
 
     return is_within_left_bounds(steps, test_loc) and num_of_crossing_pipes % 2 == 1
 
+
 def create_map(lines):
-    return {(i, j): convert_symbol_to_exits((i,j), symbol) for i, line in enumerate(lines) for j, symbol in enumerate(line)}
+    return {
+        (i, j): convert_symbol_to_exits((i, j), symbol)
+        for i, line in enumerate(lines)
+        for j, symbol in enumerate(line)
+    }
+
 
 def follow_loop(the_map):
     start = next(key for key, value in the_map.items() if len(value) == 4)
@@ -99,20 +112,22 @@ def follow_loop(the_map):
 
     return steps
 
+
 def count_furthest_point(file):
     lines = read_input(file)
     the_map = create_map(lines)
     return len(follow_loop(the_map)) // 2
+
 
 def count_enclosed(file):
     lines = read_input(file)
     the_map = create_map(lines)
     steps = follow_loop(the_map)
     start = next(key for key, value in the_map.items() if len(value) == 4)
-    
+
     x_max = len(lines)
     y_max = len(lines[0])
-   
+
     enclosed_count = 0
     looking_for = None
     for x in range(0, x_max):
@@ -123,33 +138,37 @@ def count_enclosed(file):
                 if loc == start:
                     lower_link = has_upper_link(the_map, (loc[0] + 1, loc[1]))
                     upper_link = has_lower_link(the_map, (loc[0] - 1, loc[1]))
-                else:    
+                else:
                     lower_link = has_lower_link(the_map, loc)
                     upper_link = has_upper_link(the_map, loc)
                 is_pipe = loc != start and lower_link and upper_link
-                switch = is_pipe or (looking_for == 'lower' and lower_link) or (looking_for == 'upper' and upper_link)
+                switch = (
+                    is_pipe
+                    or (looking_for == "lower" and lower_link)
+                    or (looking_for == "upper" and upper_link)
+                )
 
                 if switch:
                     in_loop = not in_loop
                     looking_for = None
                 else:
-                    if looking_for == 'lower':
-                        looking_for = None if upper_link else 'lower'
-                    elif looking_for == 'upper':
-                        looking_for = None if lower_link else 'upper'
+                    if looking_for == "lower":
+                        looking_for = None if upper_link else "lower"
+                    elif looking_for == "upper":
+                        looking_for = None if lower_link else "upper"
                     else:
-                        looking_for = 'lower' if upper_link else 'upper'
+                        looking_for = "lower" if upper_link else "upper"
 
             else:
                 if in_loop:
                     enclosed_count += 1
-            
-                 
+
     return enclosed_count
 
     # TODO: Figure out why this does not work
     # possibles = [(x, y) for x in range(0, x_max) for y in range(0, y_max) if (x, y) not in steps]
     # return sum([is_enclosed(the_map, steps, possible) for possible in possibles])
+
 
 # PART ONE
 print("PART ONE:")
