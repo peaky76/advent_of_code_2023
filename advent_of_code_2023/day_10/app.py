@@ -44,13 +44,18 @@ def get_continuous_ranges(y_values):
 
     return continuous_ranges
 
-
 def is_connected(the_map, loc, other_loc):
     return loc in the_map[other_loc] and other_loc in the_map[loc]
 
 def is_within_left_bounds(steps, test_loc):
     x, y = test_loc    
     return any([loc for loc in steps if loc[0] == x and loc[1] < y])
+
+def has_lower_link(the_map, loc):
+    return (loc[0] + 1, loc[1]) in the_map.get(loc, [])
+
+def has_upper_link(the_map, loc):
+    return (loc[0] - 1, loc[1]) in the_map.get(loc, [])
 
 def is_enclosed(the_map, steps, test_loc):
     x, y = test_loc    
@@ -59,17 +64,17 @@ def is_enclosed(the_map, steps, test_loc):
     num_of_crossing_pipes = 0
     looking_for = None
     for loc in map_locs_to_right:
-        has_upper_link = (loc[0] - 1, loc[1]) in the_map[loc]
-        has_lower_link = (loc[0] + 1, loc[1]) in the_map[loc]
-        if has_upper_link and has_lower_link:            
+        upper_link = has_upper_link(the_map, loc)
+        lower_link = has_lower_link(the_map, loc)
+        if upper_link and lower_link:            
             num_of_crossing_pipes += 1
-        elif has_upper_link:
+        elif upper_link:
             if looking_for == "upper":
                 num_of_crossing_pipes += 1
                 looking_for = None
             else:
                 looking_for = "lower"
-        elif has_lower_link:
+        elif lower_link:
             if looking_for == "lower":
                 num_of_crossing_pipes += 1
                 looking_for = None
@@ -103,12 +108,48 @@ def count_enclosed(file):
     lines = read_input(file)
     the_map = create_map(lines)
     steps = follow_loop(the_map)
-    x_min = min(x for x, y in steps)
-    x_max = max(x for x, y in steps)
-    y_min = min(y for x, y in steps)
-    y_max = max(y for x, y in steps)
-    possibles = [(x, y) for x in range(x_min, x_max + 1) for y in range(y_min, y_max + 1) if (x, y) not in steps]
-    return sum([is_enclosed(the_map, steps, possible) for possible in possibles])
+    start = next(key for key, value in the_map.items() if len(value) == 4)
+    
+    x_max = len(lines)
+    y_max = len(lines[0])
+   
+    enclosed_count = 0
+    looking_for = None
+    for x in range(0, x_max):
+        in_loop = False
+        for y in range(0, y_max):
+            loc = (x, y)
+            if loc in steps:
+                if loc == start:
+                    lower_link = has_upper_link(the_map, (loc[0] + 1, loc[1]))
+                    upper_link = has_lower_link(the_map, (loc[0] - 1, loc[1]))
+                else:    
+                    lower_link = has_lower_link(the_map, loc)
+                    upper_link = has_upper_link(the_map, loc)
+                is_pipe = loc != start and lower_link and upper_link
+                switch = is_pipe or (looking_for == 'lower' and lower_link) or (looking_for == 'upper' and upper_link)
+
+                if switch:
+                    in_loop = not in_loop
+                    looking_for = None
+                else:
+                    if looking_for == 'lower':
+                        looking_for = None if upper_link else 'lower'
+                    elif looking_for == 'upper':
+                        looking_for = None if lower_link else 'upper'
+                    else:
+                        looking_for = 'lower' if upper_link else 'upper'
+
+            else:
+                if in_loop:
+                    enclosed_count += 1
+            
+                 
+    return enclosed_count
+
+    # TODO: Figure out why this does not work
+    # possibles = [(x, y) for x in range(0, x_max) for y in range(0, y_max) if (x, y) not in steps]
+    # return sum([is_enclosed(the_map, steps, possible) for possible in possibles])
 
 # PART ONE
 print("PART ONE:")
