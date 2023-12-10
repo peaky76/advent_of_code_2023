@@ -28,39 +28,104 @@ def convert_symbol_to_exits(loc, symbol):
         "S": [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)],
     }[symbol]
 
-def is_connected(map, loc, other_loc):
-    return loc in map[other_loc] and other_loc in map[loc]
+def get_continuous_ranges(y_values):
+    continuous_ranges = []
+    if y_values:
+        range_start = y_values[0]
+        range_end = y_values[0]
+        if len(y_values) > 1:
+            for i, y in enumerate(y_values[1:]):
+                if y - y_values[i] > 1:
+                    continuous_ranges.append((range_start, range_end + 1))
+                    range_start = y
+                range_end = y
+        
+        continuous_ranges.append((range_start, range_end + 1))
+
+    return continuous_ranges
+
+
+def is_connected(the_map, loc, other_loc):
+    return loc in the_map[other_loc] and other_loc in the_map[loc]
+
+def is_within_left_bounds(steps, test_loc):
+    x, y = test_loc    
+    return any([loc for loc in steps if loc[0] == x and loc[1] < y])
+
+def is_enclosed(the_map, steps, test_loc):
+    x, y = test_loc    
+    map_locs_to_right = sorted([loc for loc in steps if loc[0] == x and loc[1] > y])
+
+    num_of_crossing_pipes = 0
+    looking_for = None
+    for loc in map_locs_to_right:
+        has_upper_link = (loc[0] - 1, loc[1]) in the_map[loc]
+        has_lower_link = (loc[0] + 1, loc[1]) in the_map[loc]
+        if has_upper_link and has_lower_link:            
+            num_of_crossing_pipes += 1
+        elif has_upper_link:
+            if looking_for == "upper":
+                num_of_crossing_pipes += 1
+                looking_for = None
+            else:
+                looking_for = "lower"
+        elif has_lower_link:
+            if looking_for == "lower":
+                num_of_crossing_pipes += 1
+                looking_for = None
+            else:
+                looking_for = "upper"
+
+    return is_within_left_bounds(steps, test_loc) and num_of_crossing_pipes % 2 == 1
 
 def create_map(lines):
     return {(i, j): convert_symbol_to_exits((i,j), symbol) for i, line in enumerate(lines) for j, symbol in enumerate(line)}
 
-def follow_loop(file):
-    lines = read_input(file)
-    the_map = create_map(lines)
+def follow_loop(the_map):
     start = next(key for key, value in the_map.items() if len(value) == 4)
-    steps = 1
     prev_loc = start
-    current_loc = next(val for val in the_map[start] if start in the_map[val])
+    current_loc = next(val for val in the_map[start] if start in the_map.get(val, []))
+    steps = [current_loc]
     while current_loc != start:
-        steps += 1
         next_loc = next(val for val in the_map[current_loc] if val != prev_loc)
+        steps.append(next_loc)
         prev_loc = current_loc
         current_loc = next_loc
-    return steps // 2
 
-    
+    return steps
+
+def count_furthest_point(file):
+    lines = read_input(file)
+    the_map = create_map(lines)
+    return len(follow_loop(the_map)) // 2
+
+def count_enclosed(file):
+    lines = read_input(file)
+    the_map = create_map(lines)
+    steps = follow_loop(the_map)
+    x_min = min(x for x, y in steps)
+    x_max = max(x for x, y in steps)
+    y_min = min(y for x, y in steps)
+    y_max = max(y for x, y in steps)
+    possibles = [(x, y) for x in range(x_min, x_max + 1) for y in range(y_min, y_max + 1) if (x, y) not in steps]
+    return sum([is_enclosed(the_map, steps, possible) for possible in possibles])
+
 # PART ONE
 print("PART ONE:")
-example_1_answer = follow_loop("./day_10/example_input_1")
+example_1_answer = count_furthest_point("./day_10/example_input_1")
 print(f"Example 1 answer: {example_1_answer}")
-example_2_answer = follow_loop("./day_10/example_input_2")
+example_2_answer = count_furthest_point("./day_10/example_input_2")
 print(f"Example 2 answer: {example_2_answer}")
-puzzle_answer = follow_loop("./day_10/puzzle_input")
+puzzle_answer = count_furthest_point("./day_10/puzzle_input")
 print(f"Puzzle answer: {puzzle_answer}")
 
 # PART TWO
-# print("PART TWO:")
-# example_answer = the_function("./day_10/example_input")
-# print(f"Example answer: {example_answer}")
-# puzzle_answer = the_function("./day_10/puzzle_input")
-# print(f"Puzzle answer: {puzzle_answer}")
+print("PART TWO:")
+example_3_answer = count_enclosed("./day_10/example_input_3")
+print(f"Example 3 answer: {example_3_answer}")
+example_4_answer = count_enclosed("./day_10/example_input_4")
+print(f"Example 4 answer: {example_4_answer}")
+example_5_answer = count_enclosed("./day_10/example_input_5")
+print(f"Example 5 answer: {example_5_answer}")
+puzzle_answer = count_enclosed("./day_10/puzzle_input")
+print(f"Puzzle answer: {puzzle_answer}")
