@@ -1,5 +1,5 @@
 import pytest
-from .app import extrapolate_backwards, extrapolate_forwards, get_diffs
+from .app import extrapolate, get_diffs
 
 
 @pytest.mark.parametrize(
@@ -11,7 +11,7 @@ from .app import extrapolate_backwards, extrapolate_forwards, get_diffs
     ],
 )
 def test_extrapolate_backwards(test_input, expected):
-    actual = extrapolate_backwards(test_input)
+    actual = extrapolate(test_input, forwards=False)
     assert actual == expected
 
 
@@ -24,7 +24,7 @@ def test_extrapolate_backwards(test_input, expected):
     ],
 )
 def test_extrapolate_forwards(test_input, expected):
-    actual = extrapolate_forwards(test_input)
+    actual = extrapolate(test_input)
     assert actual == expected
 
 
