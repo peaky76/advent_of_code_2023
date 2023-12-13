@@ -97,14 +97,14 @@ def find_valid_part_numbers(file):
     ]
 
 
-# PART ONE
-example_answer = sum(find_valid_part_numbers("./day_3/example_input"))
-print(f"Example answer: {example_answer}")
-puzzle_answer = sum(find_valid_part_numbers("./day_3/puzzle_input"))
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART ONE
+# example_answer = sum(find_valid_part_numbers("./day_3/example_input"))
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = sum(find_valid_part_numbers("./day_3/puzzle_input"))
+# print(f"Puzzle answer: {puzzle_answer}")
 
-# PART TWO
-example_answer = sum_gear_ratios("./day_3/example_input")
-print(f"Example answer: {example_answer}")
-puzzle_answer = sum_gear_ratios("./day_3/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART TWO
+# example_answer = sum_gear_ratios("./day_3/example_input")
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = sum_gear_ratios("./day_3/puzzle_input")
+# print(f"Puzzle answer: {puzzle_answer}")

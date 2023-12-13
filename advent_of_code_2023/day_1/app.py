@@ -45,23 +45,23 @@ def get_calibration_value(line, *, digits_only=True):
 
 
 # PART ONE
-example_answer = sum(
-    get_calibration_value(line) for line in read_input("./day_1/example_input_1")
-)
-print(f"Example answer: {example_answer}")
-puzzle_answer = sum(
-    get_calibration_value(line) for line in read_input("./day_1/puzzle_input")
-)
-print(f"Puzzle answer: {puzzle_answer}")
+# example_answer = sum(
+#     get_calibration_value(line) for line in read_input("./day_1/example_input_1")
+# )
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = sum(
+#     get_calibration_value(line) for line in read_input("./day_1/puzzle_input")
+# )
+# print(f"Puzzle answer: {puzzle_answer}")
 
-# PART TWO
-example_answer = sum(
-    get_calibration_value(line, digits_only=False)
-    for line in read_input("./day_1/example_input_2")
-)
-print(f"Example answer: {example_answer}")
-puzzle_answer = sum(
-    get_calibration_value(line, digits_only=False)
-    for line in read_input("./day_1/puzzle_input")
-)
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART TWO
+# example_answer = sum(
+#     get_calibration_value(line, digits_only=False)
+#     for line in read_input("./day_1/example_input_2")
+# )
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = sum(
+#     get_calibration_value(line, digits_only=False)
+#     for line in read_input("./day_1/puzzle_input")
+# )
+# print(f"Puzzle answer: {puzzle_answer}")

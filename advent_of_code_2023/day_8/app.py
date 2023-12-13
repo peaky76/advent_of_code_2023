@@ -73,19 +73,19 @@ def get_step_count(file, *, use_ghosts=False):
     return steps
 
 
-# PART ONE
-example_1_answer = get_step_count("./day_8/example_input_1")
-print(f"Part 1 Example 1 answer: {example_1_answer}")
-example_2_answer = get_step_count("./day_8/example_input_2")
-print(f"Part 1 Example 2 answer: {example_2_answer}")
-puzzle_answer = get_step_count("./day_8/puzzle_input")
-print(f"Part 1 Puzzle answer: {puzzle_answer}")
+# # PART ONE
+# example_1_answer = get_step_count("./day_8/example_input_1")
+# print(f"Part 1 Example 1 answer: {example_1_answer}")
+# example_2_answer = get_step_count("./day_8/example_input_2")
+# print(f"Part 1 Example 2 answer: {example_2_answer}")
+# puzzle_answer = get_step_count("./day_8/puzzle_input")
+# print(f"Part 1 Puzzle answer: {puzzle_answer}")
 
-# # PART TWO
-example_answer = get_step_count("./day_8/example_input_3", use_ghosts=True)
-print(f"Part 2 Example answer: {example_answer}")
-puzzle_answer = get_step_count("./day_8/puzzle_input", use_ghosts=True)
-print(f"Part 2 Puzzle answer: {puzzle_answer}")
+# # # PART TWO
+# example_answer = get_step_count("./day_8/example_input_3", use_ghosts=True)
+# print(f"Part 2 Example answer: {example_answer}")
+# puzzle_answer = get_step_count("./day_8/puzzle_input", use_ghosts=True)
+# print(f"Part 2 Puzzle answer: {puzzle_answer}")
 
 # lines = read_input("./day_8/puzzle_input")
 # wasteland_map = { k: v for line in lines[2:] for k, v in map_line_to_dict(line).items() }

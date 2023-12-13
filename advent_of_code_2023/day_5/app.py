@@ -97,14 +97,14 @@ def get_min_for_range_of_seeds(file):
     return min(locations)
 
 
-# PART ONE
-example_answer = get_min_for_individual_seeds("./day_5/example_input")
-print(f"Example answer: {example_answer}")
-puzzle_answer = get_min_for_individual_seeds("./day_5/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
-
-# PART TWO
-example_answer = get_min_for_range_of_seeds("./day_5/example_input")
-print(f"Example answer: {example_answer}")
-# puzzle_answer = get_min_for_range_of_seeds("./day_5/puzzle_input")
+# # PART ONE
+# example_answer = get_min_for_individual_seeds("./day_5/example_input")
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = get_min_for_individual_seeds("./day_5/puzzle_input")
 # print(f"Puzzle answer: {puzzle_answer}")
+
+# # PART TWO
+# example_answer = get_min_for_range_of_seeds("./day_5/example_input")
+# print(f"Example answer: {example_answer}")
+# # puzzle_answer = get_min_for_range_of_seeds("./day_5/puzzle_input")
+# # print(f"Puzzle answer: {puzzle_answer}")

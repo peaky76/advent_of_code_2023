@@ -51,14 +51,14 @@ def count_copies(file):
     return sum(copy_count.values())
 
 
-# PART ONE
-example_answer = assess_scratchcards("./day_4/example_input")
-print(f"Example answer: {example_answer}")
-puzzle_answer = assess_scratchcards("./day_4/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART ONE
+# example_answer = assess_scratchcards("./day_4/example_input")
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = assess_scratchcards("./day_4/puzzle_input")
+# print(f"Puzzle answer: {puzzle_answer}")
 
-# PART TWO
-example_answer = count_copies("./day_4/example_input")
-print(f"Example answer: {example_answer}")
-puzzle_answer = count_copies("./day_4/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART TWO
+# example_answer = count_copies("./day_4/example_input")
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = count_copies("./day_4/puzzle_input")
+# print(f"Puzzle answer: {puzzle_answer}")

@@ -39,14 +39,14 @@ def calculate_margin_of_error(file, *, bad_kerning=False):
     )
 
 
-# PART ONE
-example_answer = calculate_margin_of_error("./day_6/example_input")
-print(f"Example answer: {example_answer}")
-puzzle_answer = calculate_margin_of_error("./day_6/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART ONE
+# example_answer = calculate_margin_of_error("./day_6/example_input")
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = calculate_margin_of_error("./day_6/puzzle_input")
+# print(f"Puzzle answer: {puzzle_answer}")
 
-# PART TWO
-example_answer = calculate_margin_of_error("./day_6/example_input", bad_kerning=True)
-print(f"Example answer: {example_answer}")
-puzzle_answer = calculate_margin_of_error("./day_6/puzzle_input", bad_kerning=True)
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART TWO
+# example_answer = calculate_margin_of_error("./day_6/example_input", bad_kerning=True)
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = calculate_margin_of_error("./day_6/puzzle_input", bad_kerning=True)
+# print(f"Puzzle answer: {puzzle_answer}")

@@ -51,20 +51,20 @@ def get_games(input):
     return [parse_input(line) for line in input]
 
 
-# PART ONE
-example_answer = sum_of_possible_games(read_input("./day_2/example_input"))
-print(f"Example answer: {example_answer}")
-puzzle_answer = sum_of_possible_games(read_input("./day_2/puzzle_input"))
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART ONE
+# example_answer = sum_of_possible_games(read_input("./day_2/example_input"))
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = sum_of_possible_games(read_input("./day_2/puzzle_input"))
+# print(f"Puzzle answer: {puzzle_answer}")
 
-# # PART TWO
-example_answer = sum(
-    prod(min_possible_balls(game["rgb"]))
-    for game in get_games(read_input("./day_2/example_input"))
-)
-print(f"Example answer: {example_answer}")
-puzzle_answer = sum(
-    prod(min_possible_balls(game["rgb"]))
-    for game in get_games(read_input("./day_2/puzzle_input"))
-)
-print(f"Puzzle answer: {puzzle_answer}")
+# # # PART TWO
+# example_answer = sum(
+#     prod(min_possible_balls(game["rgb"]))
+#     for game in get_games(read_input("./day_2/example_input"))
+# )
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = sum(
+#     prod(min_possible_balls(game["rgb"]))
+#     for game in get_games(read_input("./day_2/puzzle_input"))
+# )
+# print(f"Puzzle answer: {puzzle_answer}")

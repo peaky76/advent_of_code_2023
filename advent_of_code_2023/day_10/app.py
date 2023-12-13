@@ -170,22 +170,22 @@ def count_enclosed(file):
     # return sum([is_enclosed(the_map, steps, possible) for possible in possibles])
 
 
-# PART ONE
-print("PART ONE:")
-example_1_answer = count_furthest_point("./day_10/example_input_1")
-print(f"Example 1 answer: {example_1_answer}")
-example_2_answer = count_furthest_point("./day_10/example_input_2")
-print(f"Example 2 answer: {example_2_answer}")
-puzzle_answer = count_furthest_point("./day_10/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART ONE
+# print("PART ONE:")
+# example_1_answer = count_furthest_point("./day_10/example_input_1")
+# print(f"Example 1 answer: {example_1_answer}")
+# example_2_answer = count_furthest_point("./day_10/example_input_2")
+# print(f"Example 2 answer: {example_2_answer}")
+# puzzle_answer = count_furthest_point("./day_10/puzzle_input")
+# print(f"Puzzle answer: {puzzle_answer}")
 
-# PART TWO
-print("PART TWO:")
-example_3_answer = count_enclosed("./day_10/example_input_3")
-print(f"Example 3 answer: {example_3_answer}")
-example_4_answer = count_enclosed("./day_10/example_input_4")
-print(f"Example 4 answer: {example_4_answer}")
-example_5_answer = count_enclosed("./day_10/example_input_5")
-print(f"Example 5 answer: {example_5_answer}")
-puzzle_answer = count_enclosed("./day_10/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART TWO
+# print("PART TWO:")
+# example_3_answer = count_enclosed("./day_10/example_input_3")
+# print(f"Example 3 answer: {example_3_answer}")
+# example_4_answer = count_enclosed("./day_10/example_input_4")
+# print(f"Example 4 answer: {example_4_answer}")
+# example_5_answer = count_enclosed("./day_10/example_input_5")
+# print(f"Example 5 answer: {example_5_answer}")
+# puzzle_answer = count_enclosed("./day_10/puzzle_input")
+# print(f"Puzzle answer: {puzzle_answer}")

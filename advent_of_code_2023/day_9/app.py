@@ -27,16 +27,16 @@ def sum_extrapolate_values(file, *, forwards=True):
     )
 
 
-# # PART ONE
-print("PART ONE:")
-example_answer = sum_extrapolate_values("./day_9/example_input")
-print(f"Example answer: {example_answer}")
-puzzle_answer = sum_extrapolate_values("./day_9/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
+# # # PART ONE
+# print("PART ONE:")
+# example_answer = sum_extrapolate_values("./day_9/example_input")
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = sum_extrapolate_values("./day_9/puzzle_input")
+# print(f"Puzzle answer: {puzzle_answer}")
 
-# # PART TWO
-print("PART TWO:")
-example_answer = sum_extrapolate_values("./day_9/example_input", forwards=False)
-print(f"Example answer: {example_answer}")
-puzzle_answer = sum_extrapolate_values("./day_9/puzzle_input", forwards=False)
-print(f"Puzzle answer: {puzzle_answer}")
+# # # PART TWO
+# print("PART TWO:")
+# example_answer = sum_extrapolate_values("./day_9/example_input", forwards=False)
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = sum_extrapolate_values("./day_9/puzzle_input", forwards=False)
+# print(f"Puzzle answer: {puzzle_answer}")

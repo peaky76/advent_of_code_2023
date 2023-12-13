@@ -70,14 +70,14 @@ def get_total_winnings(file, *, wild_jack=False):
     )
 
 
-# PART ONE
-example_answer = get_total_winnings("./day_7/example_input")
-print(f"Example answer: {example_answer}")
-puzzle_answer = get_total_winnings("./day_7/puzzle_input")
-print(f"Puzzle answer: {puzzle_answer}")
+# # PART ONE
+# example_answer = get_total_winnings("./day_7/example_input")
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = get_total_winnings("./day_7/puzzle_input")
+# print(f"Puzzle answer: {puzzle_answer}")
 
-# # PART TWO
-example_answer = get_total_winnings("./day_7/example_input", wild_jack=True)
-print(f"Example answer: {example_answer}")
-puzzle_answer = get_total_winnings("./day_7/puzzle_input", wild_jack=True)
-print(f"Puzzle answer: {puzzle_answer}")
+# # # PART TWO
+# example_answer = get_total_winnings("./day_7/example_input", wild_jack=True)
+# print(f"Example answer: {example_answer}")
+# puzzle_answer = get_total_winnings("./day_7/puzzle_input", wild_jack=True)
+# print(f"Puzzle answer: {puzzle_answer}")
